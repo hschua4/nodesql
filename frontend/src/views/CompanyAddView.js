@@ -79,7 +79,7 @@ const CompanyAddView = ({ match, history }) => {
 							<Form.Group controlId='email'>
 								<Form.Label>Email</Form.Label>
 								<Form.Control
-									type='email'
+									type='text'
 									placeholder='Enter email'
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}

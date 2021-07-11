@@ -1,4 +1,5 @@
 const { Companies } = require('../models');
+const { validationResult } = require('express-validator');
 
 // @desc    Get all companies
 // @route   GET /company/:pageNumber
@@ -32,24 +33,46 @@ const getCompany = async (req, res) => {
 // @route   POST /company
 // @access  Private
 const createCompany = async (req, res) => {
-	const { name, email, logo, websiteURL } = req.body;
+	try {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			let errorItem = '';
+			errors.errors.forEach((error) => {
+				errorItem = errorItem + ' ' + error.msg;
+			});
+			throw new Error(errorItem);
+		}
 
-	const createdCompany = await Companies.create({
-		Name: name,
-		Email: email,
-		Logo: logo,
-		WebsiteURL: websiteURL,
-	});
-	res.status(201).json(createdCompany);
+		const { name, email, logo, websiteURL } = req.body;
+
+		const createdCompany = await Companies.create({
+			Name: name,
+			Email: email,
+			Logo: logo,
+			WebsiteURL: websiteURL,
+		});
+		res.status(201).json(createdCompany);
+	} catch (error) {
+		res.status(400).json({ message: error.message });
+	}
 };
 
 // @desc    Update a company
 // @route   PUT /company/:id
 // @access  Private
 const updateCompany = async (req, res) => {
-	const { name, email, logo, websiteURL } = req.body;
-
 	try {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			let errorItem = '';
+			errors.errors.forEach((error) => {
+				errorItem = errorItem + ' ' + error.msg;
+			});
+			throw new Error(errorItem);
+		}
+
+		const { name, email, logo, websiteURL } = req.body;
+
 		const company = await Companies.findOne({ id: req.params.id });
 
 		if (company) {
@@ -69,7 +92,7 @@ const updateCompany = async (req, res) => {
 			throw new Error('Company not found');
 		}
 	} catch (error) {
-		res.json(error.message);
+		res.status(400).json({ message: error.message });
 	}
 };
 

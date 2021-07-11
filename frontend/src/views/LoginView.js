@@ -39,7 +39,7 @@ const LoginView = ({ history }) => {
 						<Form.Group controlId='email' className='mt-5'>
 							<Form.Label className=''>Email Address</Form.Label>
 							<Form.Control
-								type='email'
+								type='text'
 								placeholder='Enter Email'
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}

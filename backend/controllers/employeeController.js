@@ -1,4 +1,5 @@
 const { Employees } = require('../models');
+const { validationResult } = require('express-validator');
 
 // @desc    Get all employees
 // @route   GET /employee
@@ -32,25 +33,47 @@ const getEmployee = async (req, res) => {
 // @route   POST /employee
 // @access  Private
 const createEmployee = async (req, res) => {
-	const { firstName, lastName, company, phone, email } = req.body;
+	try {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			let errorItem = '';
+			errors.errors.forEach((error) => {
+				errorItem = errorItem + ' ' + error.msg;
+			});
+			throw new Error(errorItem);
+		}
 
-	const createdEmployee = await Employees.create({
-		FirstName: firstName,
-		LastName: lastName,
-		Company: company,
-		Phone: phone,
-		Email: email,
-	});
-	res.status(201).json(createdEmployee);
+		const { firstName, lastName, company, phone, email } = req.body;
+
+		const createdEmployee = await Employees.create({
+			FirstName: firstName,
+			LastName: lastName,
+			Company: company,
+			Phone: phone,
+			Email: email,
+		});
+		res.status(201).json(createdEmployee);
+	} catch (error) {
+		res.status(400).json({ message: error.message });
+	}
 };
 
 // @desc    Update an employee
 // @route   PUT /employee/:id
 // @access  Private
 const updateEmployee = async (req, res) => {
-	const { firstName, lastName, company, phone, email } = req.body;
-
 	try {
+		const errors = validationResult(req);
+		if (!errors.isEmpty()) {
+			let errorItem = '';
+			errors.errors.forEach((error) => {
+				errorItem = errorItem + ' ' + error.msg;
+			});
+			throw new Error(errorItem);
+		}
+
+		const { firstName, lastName, company, phone, email } = req.body;
+
 		const employee = await Employees.findOne({ id: req.params.id });
 
 		if (employee) {
@@ -71,7 +94,7 @@ const updateEmployee = async (req, res) => {
 			throw new Error('Employee not found');
 		}
 	} catch (error) {
-		res.json(error.message);
+		res.status(400).json({ message: error.message });
 	}
 };
 
