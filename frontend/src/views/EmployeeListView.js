@@ -5,36 +5,36 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Paginate from '../components/Paginate';
-import { getCompanyList, deleteCompany } from '../actions/companyActions';
+import { getEmployeeList, deleteEmployee } from '../actions/employeeActions';
 
-function CompanyListView({ history, match }) {
+function EmployeeListView({ history, match }) {
 	const pageNumber = match.params.pageNumber || 1;
 	const dispatch = useDispatch();
 
-	const companyList = useSelector((state) => state.companyList);
-	const { loading, error, companies, pages, page } = companyList;
+	const employeeList = useSelector((state) => state.employeeList);
+	const { loading, error, employees, pages, page } = employeeList;
 
 	const userLogin = useSelector((state) => state.userLogin);
 	const { userInfo } = userLogin;
 
-	const companyDelete = useSelector((state) => state.companyDelete);
+	const employeeDelete = useSelector((state) => state.employeeDelete);
 	const {
 		loading: loadingDelete,
 		error: errorDelete,
 		success: successDelete,
-	} = companyDelete;
+	} = employeeDelete;
 
 	useEffect(() => {
 		if (!userInfo) {
 			history.push('/');
 		}
 
-		dispatch(getCompanyList(pageNumber));
+		dispatch(getEmployeeList(pageNumber));
 	}, [userInfo, history, dispatch, successDelete, pageNumber]);
 
 	const deleteHandler = (id) => {
-		if (window.confirm('Confirm delete company?')) {
-			dispatch(deleteCompany(id));
+		if (window.confirm('Confirm delete employee?')) {
+			dispatch(deleteEmployee(id));
 		}
 	};
 
@@ -42,12 +42,12 @@ function CompanyListView({ history, match }) {
 		<>
 			<Row className='align-items-center'>
 				<Col>
-					<h1>Companies</h1>
+					<h1>Employees</h1>
 				</Col>
 				<Col className='text-end'>
-					<LinkContainer to='/company/add'>
+					<LinkContainer to='/employee/add'>
 						<Button className='my-3'>
-							<i className='fas fa-plus'></i>Add Company
+							<i className='fas fa-plus'></i>Add Employee
 						</Button>
 					</LinkContainer>
 				</Col>
@@ -65,24 +65,24 @@ function CompanyListView({ history, match }) {
 					<Table striped bordered hover responsive className='table-sm'>
 						<thead>
 							<tr>
-								<th>Name</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Company</th>
 								<th>Email</th>
-								<th>Logo</th>
-								<th>WebsiteURL</th>
+								<th>Phone</th>
 								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							{companies.map((company) => (
-								<tr key={company.id}>
-									<td>{company.Name}</td>
-									<td>{company.Email}</td>
+							{employees.map((employee) => (
+								<tr key={employee.id}>
+									<td>{employee.FirstName}</td>
+									<td>{employee.LastName}</td>
+									<td>{employee.Company}</td>
+									<td>{employee.Email}</td>
+									<td>{employee.Phone}</td>
 									<td>
-										<Image src={company.Logo} alt='' height={50} />
-									</td>
-									<td>{company.WebsiteURL}</td>
-									<td>
-										<LinkContainer to={`/company/edit/${company.id}`}>
+										<LinkContainer to={`/employee/edit/${employee.id}`}>
 											<Button variant='light' className='btn-sm'>
 												<i className='fas fa-edit'></i>
 											</Button>
@@ -90,7 +90,7 @@ function CompanyListView({ history, match }) {
 										<Button
 											variant='danger'
 											className='btn-sm'
-											onClick={() => deleteHandler(company.id)}
+											onClick={() => deleteHandler(employee.id)}
 										>
 											<i className='fas fa-trash'></i>
 										</Button>
@@ -100,11 +100,11 @@ function CompanyListView({ history, match }) {
 						</tbody>
 					</Table>
 
-					<Paginate pages={pages} page={page} pageName={'company'} />
+					<Paginate pages={pages} page={page} pageName={'employee'} />
 				</>
 			)}
 		</>
 	);
 }
 
-export default CompanyListView;
+export default EmployeeListView;

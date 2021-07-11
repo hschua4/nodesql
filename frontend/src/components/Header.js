@@ -30,7 +30,7 @@ const Header = () => {
 									<LinkContainer to='/company/pages/1'>
 										<Nav.Link>Company</Nav.Link>
 									</LinkContainer>
-									<LinkContainer to='/company'>
+									<LinkContainer to='/employee/pages/1'>
 										<Nav.Link>Employee</Nav.Link>
 									</LinkContainer>
 									<NavDropdown title={userInfo.email} id='username'>

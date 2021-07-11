@@ -10,6 +10,14 @@ import {
 	companyAddReducer,
 } from './reducers/companyReducers';
 
+import {
+	employeeListReducer,
+	employeeDeleteReducer,
+	employeeDetailsReducer,
+	employeeUpdateReducer,
+	employeeAddReducer,
+} from './reducers/employeeReducers';
+
 const reducer = combineReducers({
 	userLogin: loginReducer,
 	companyList: companyListReducer,
@@ -17,6 +25,11 @@ const reducer = combineReducers({
 	companyDetails: companyDetailsReducer,
 	companyUpdate: companyUpdateReducer,
 	companyAdd: companyAddReducer,
+	employeeList: employeeListReducer,
+	employeeDelete: employeeDeleteReducer,
+	employeeDetails: employeeDetailsReducer,
+	employeeUpdate: employeeUpdateReducer,
+	employeeAdd: employeeAddReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userInfo')

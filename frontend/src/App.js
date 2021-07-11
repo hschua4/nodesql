@@ -6,6 +6,10 @@ import CompanyListView from './views/CompanyListView';
 import CompanyEditView from './views/CompanyEditView';
 import CompanyAddView from './views/CompanyAddView';
 
+import EmployeeListView from './views/EmployeeListView';
+import EmployeeEditView from './views/EmployeeEditView';
+import EmployeeAddView from './views/EmployeeAddView';
+
 function App() {
 	return (
 		<Router>
@@ -20,6 +24,14 @@ function App() {
 					/>
 					<Route path='/company/edit/:id' component={CompanyEditView} exact />
 					<Route path='/company/add' component={CompanyAddView} exact />
+
+					<Route
+						path='/employee/pages/:pageNumber'
+						component={EmployeeListView}
+						exact
+					/>
+					<Route path='/employee/edit/:id' component={EmployeeEditView} exact />
+					<Route path='/employee/add' component={EmployeeAddView} exact />
 				</Container>
 			</main>
 		</Router>

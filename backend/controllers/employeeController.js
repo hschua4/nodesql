@@ -4,8 +4,28 @@ const { Employees } = require('../models');
 // @route   GET /employee
 // @access  Private
 const getEmployees = async (req, res) => {
-	const employees = await Employees.findAll();
-	res.json(employees);
+	try {
+		const pageSize = 10;
+		const page = Number(req.query.pageNumber) || 1;
+
+		const employees = await Employees.findAll({
+			limit: pageSize,
+			offset: pageSize * (page - 1),
+		});
+
+		const count = await Employees.count();
+		res.json({ employees, pageSize, pages: Math.ceil(count / pageSize) });
+	} catch (error) {
+		res.json(error.message);
+	}
+};
+
+// @desc    Get one employee
+// @route   GET /employee/:id
+// @access  Private
+const getEmployee = async (req, res) => {
+	const employee = await Employees.findOne({ where: { id: req.params.id } });
+	res.json(employee);
 };
 
 // @desc    Create an employee
@@ -80,6 +100,7 @@ const deleteEmployee = async (req, res) => {
 
 module.exports = {
 	getEmployees,
+	getEmployee,
 	createEmployee,
 	updateEmployee,
 	deleteEmployee,
