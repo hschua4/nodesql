@@ -39,10 +39,6 @@ function CompanyListView({ history, match }) {
 		}
 	};
 
-	// const createProductHandler = () => {
-	// 	console.log('Product created');
-	// };
-
 	return (
 		<>
 			<Row className='align-items-center'>
@@ -58,11 +54,8 @@ function CompanyListView({ history, match }) {
 				</Col>
 			</Row>
 
-			{/* {loadingDelete && <Loader />}
+			{loadingDelete && <Loader />}
 			{errorDelete && <Message variant='danger'>{errorDelete}</Message>}
-
-			{loadingCreate && <Loader />}
-			{errorCreate && <Message variant='danger'>{errorCreate}</Message>} */}
 
 			{loading ? (
 				<Loader />

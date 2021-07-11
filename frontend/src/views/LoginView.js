@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Form, Container, Row, Col, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../actions/userActions';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const LoginView = ({ history }) => {
 	const [email, setEmail] = useState('');
@@ -29,6 +31,10 @@ const LoginView = ({ history }) => {
 			<Row className='justify-content-md-center mt-5'>
 				<Col xs={12} md={6}>
 					<h1>Log In</h1>
+
+					{error && <Message variant='danger'>{error}</Message>}
+					{loading && <Loader />}
+
 					<Form onSubmit={(e) => submitHandler(e)}>
 						<Form.Group controlId='email' className='mt-5'>
 							<Form.Label className=''>Email Address</Form.Label>

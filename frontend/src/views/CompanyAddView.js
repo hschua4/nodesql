@@ -1,11 +1,10 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getCompanyDetails, addCompany } from '../actions/companyActions';
+import { addCompany } from '../actions/companyActions';
 import { COMPANY_ADD_RESET } from '../constants/constants';
 
 const CompanyAddView = ({ match, history }) => {
@@ -17,9 +16,6 @@ const CompanyAddView = ({ match, history }) => {
 	const [websiteURL, setWebsiteURL] = useState('');
 
 	const dispatch = useDispatch();
-
-	const companyDetails = useSelector((state) => state.companyDetails);
-	const { loading, error, company } = companyDetails;
 
 	const companyAdd = useSelector((state) => state.companyAdd);
 	const {
@@ -92,73 +88,54 @@ const CompanyAddView = ({ match, history }) => {
 					<Col xs={12} md={6}>
 						<h1>Add Company</h1>
 
-						{/* {loadingUpdate && <Loader />}
-						{errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} */}
+						{loadingAdd && <Loader />}
+						{errorAdd && <Message variant='danger'>{errorAdd}</Message>}
 
-						{loading ? (
-							<Loader />
-						) : error ? (
-							<Message variant='danger'>{error}</Message>
-						) : (
-							<Form onSubmit={submitHandler}>
-								<Form.Group controlId='name'>
-									<Form.Label>Name</Form.Label>
-									<Form.Control
-										type='name'
-										placeholder='Enter name'
-										value={name}
-										onChange={(e) => setName(e.target.value)}
-									></Form.Control>
-								</Form.Group>
+						<Form onSubmit={submitHandler}>
+							<Form.Group controlId='name'>
+								<Form.Label>Name</Form.Label>
+								<Form.Control
+									type='name'
+									placeholder='Enter name'
+									value={name}
+									onChange={(e) => setName(e.target.value)}
+								></Form.Control>
+							</Form.Group>
 
-								<Form.Group controlId='email'>
-									<Form.Label>Email</Form.Label>
-									<Form.Control
-										type='email'
-										placeholder='Enter email'
-										value={email}
-										onChange={(e) => setEmail(e.target.value)}
-									></Form.Control>
-								</Form.Group>
+							<Form.Group controlId='email'>
+								<Form.Label>Email</Form.Label>
+								<Form.Control
+									type='email'
+									placeholder='Enter email'
+									value={email}
+									onChange={(e) => setEmail(e.target.value)}
+								></Form.Control>
+							</Form.Group>
 
-								<Form.Group controlId='logo'>
-									<Form.Label>Logo</Form.Label>
-									<Form.Control
-										type='text'
-										placeholder='Enter logo url'
-										value={logo}
-										onChange={(e) => setLogo(e.target.value)}
-									></Form.Control>
+							<Form.Group controlId='logo'>
+								<Form.Label>Logo</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder='Enter logo url'
+									value={logo}
+									onChange={(e) => setLogo(e.target.value)}
+								></Form.Control>
+							</Form.Group>
 
-									{/* <input
-										type='file'
-										className='form-control'
-										onChange={uploadFileHandler}
-									/> */}
-									{/* <Form.File
-        id='image-file'
-        label='Choose File'
-        custom
-        onChange={uploadFileHandler}
-      ></Form.File> */}
-									{/* {uploading && <Loader />} */}
-								</Form.Group>
+							<Form.Group controlId='websiteURL'>
+								<Form.Label>Website URL</Form.Label>
+								<Form.Control
+									type='text'
+									placeholder='Enter Website URL'
+									value={websiteURL}
+									onChange={(e) => setWebsiteURL(e.target.value)}
+								></Form.Control>
+							</Form.Group>
 
-								<Form.Group controlId='websiteURL'>
-									<Form.Label>Website URL</Form.Label>
-									<Form.Control
-										type='text'
-										placeholder='Enter Website URL'
-										value={websiteURL}
-										onChange={(e) => setWebsiteURL(e.target.value)}
-									></Form.Control>
-								</Form.Group>
-
-								<Button type='submit' variant='primary'>
-									Add
-								</Button>
-							</Form>
-						)}
+							<Button type='submit' variant='primary'>
+								Add
+							</Button>
+						</Form>
 					</Col>
 				</Row>
 			</Container>

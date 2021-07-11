@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
@@ -91,8 +90,8 @@ const CompanyEditScreen = ({ match, history }) => {
 					<Col xs={12} md={6}>
 						<h1>Edit Company</h1>
 
-						{/* {loadingUpdate && <Loader />}
-						{errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} */}
+						{loadingUpdate && <Loader />}
+						{errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
 
 						{loading ? (
 							<Loader />
