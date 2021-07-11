@@ -16,6 +16,11 @@ Make sure to have the following installed:
 ### A. Project files and dependencies
 
 1. Clone the project into your project directory
+
+   ```bash
+   git clone https://github.com/hschua4/nodesql.git
+   ```
+
 1. Using the terminal, make sure to navigate into the project directory
 1. Install frontend dependency (may take a while):
 
