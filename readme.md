@@ -1,5 +1,9 @@
 # Submission for Backend Assessment
 
+## Background
+
+This project is created using NodeJS with Sequelize as the backend, and ReactJS with Redux as the frontend.
+
 ## Prerequisite
 
 Make sure to have the following installed:
@@ -13,19 +17,18 @@ Make sure to have the following installed:
 
 1. Clone the project into your project directory
 1. Using the terminal, make sure to navigate into the project directory
-1. Install frontend dependency (may take a while):
 
-```bash
-cd frontend
-npm install
-```
+   ```bash
+   cd frontend
+   npm install
+   ```
 
-1.Install backend dependency:
+1. Install backend dependency:
 
-```bash
-cd ../backend
-npm install
-```
+   ```bash
+   cd ../backend
+   npm install
+   ```
 
 ### B. Database
 
@@ -34,21 +37,21 @@ npm install
 1. Next, launch XAMPP and start Apache and MySQL
 1. While still inside the /backend directory, create the database:
 
-```bash
-npx sequelize db:create
-```
+   ```bash
+   npx sequelize db:create
+   ```
 
 1. Database migrations:
 
-```bash
-npx sequelize db:migrate
-```
+   ```bash
+   npx sequelize db:migrate
+   ```
 
 1. Seeding the database:
 
-```bash
-npx sequelize db:seed:all
-```
+   ```bash
+   npx sequelize db:seed:all
+   ```
 
 ### C. Running the app
 
