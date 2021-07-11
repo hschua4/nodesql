@@ -9,7 +9,7 @@ Make sure to have the following installed:
 
 ## Setting up the project
 
-### Project files and dependencies
+### A. Project files and dependencies
 
 1. Clone the project into your project directory
 1. Using the terminal, make sure to navigate into the project directory
@@ -27,7 +27,7 @@ cd ../backend
 npm install
 ```
 
-### Database
+### B. Database
 
 1. Go to /backend/config/config.json file
 1. Change the database credentials for "development", i.e "username" & "password" to match yours
@@ -50,17 +50,21 @@ npx sequelize db:migrate
 npx sequelize db:seed:all
 ```
 
-### Running the app
+### C. Running the app
 
 1. In the /backend directory, run:
 
-```bash
-npm run dev
-```
+   ```bash
+   npm run dev
+   ```
 
 1. The app should be running on localhost:3000
 1. You should be seeing the screen below:
-   ![Login Page](https://github.com/hschua4/nodesql/blob/frontend/public/nodesql1.jpg?raw=true)
+   ![Login Page](https://github.com/hschua4/nodesql/blob/master/frontend/public/images/nodesql1.JPG?raw=true)
 1. Use the following credential to log in:
    Email Address: admin@admin.com
    Password: password
+1. Company page is shown below, you could perform CRUD on companies here
+   ![Login Page](https://github.com/hschua4/nodesql/blob/master/frontend/public/images/nodesql2.JPG?raw=true)
+1. Employee page is shown below, you could perform CRUD on employees here
+   ![Login Page](https://github.com/hschua4/nodesql/blob/master/frontend/public/images/nodesql3.JPG?raw=true)
