@@ -17,6 +17,9 @@ const CompanyAddView = ({ match, history }) => {
 
 	const dispatch = useDispatch();
 
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
+
 	const companyAdd = useSelector((state) => state.companyAdd);
 	const {
 		loading: loadingAdd,
@@ -25,6 +28,10 @@ const CompanyAddView = ({ match, history }) => {
 	} = companyAdd;
 
 	useEffect(() => {
+		if (!userInfo) {
+			history.push('/');
+		}
+
 		if (successAdd) {
 			dispatch({ type: COMPANY_ADD_RESET });
 			history.push('/company/pages/1');
@@ -39,7 +46,7 @@ const CompanyAddView = ({ match, history }) => {
 		// 		setWebsiteURL(company.WebsiteURL);
 		// 	}
 		// }
-	}, [dispatch, history, successAdd]);
+	}, [dispatch, history, successAdd, userInfo]);
 
 	// const uploadFileHandler = async (e) => {
 	// 	const file = e.target.files[0];

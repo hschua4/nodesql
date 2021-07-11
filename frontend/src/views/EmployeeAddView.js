@@ -8,8 +8,6 @@ import { addEmployee } from '../actions/employeeActions';
 import { EMPLOYEE_ADD_RESET } from '../constants/constants';
 
 const EmployeeAddView = ({ match, history }) => {
-	const employeeId = match.params.id;
-
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [company, setCompany] = useState('');
@@ -17,6 +15,9 @@ const EmployeeAddView = ({ match, history }) => {
 	const [phone, setPhone] = useState('');
 
 	const dispatch = useDispatch();
+
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
 
 	const employeeAdd = useSelector((state) => state.employeeAdd);
 	const {
@@ -26,6 +27,10 @@ const EmployeeAddView = ({ match, history }) => {
 	} = employeeAdd;
 
 	useEffect(() => {
+		if (!userInfo) {
+			history.push('/');
+		}
+
 		if (successAdd) {
 			dispatch({ type: EMPLOYEE_ADD_RESET });
 			history.push('/employee/pages/1');
@@ -40,7 +45,7 @@ const EmployeeAddView = ({ match, history }) => {
 		// 		setWebsiteURL(company.WebsiteURL);
 		// 	}
 		// }
-	}, [dispatch, history, successAdd]);
+	}, [dispatch, history, successAdd, userInfo]);
 
 	// const uploadFileHandler = async (e) => {
 	// 	const file = e.target.files[0];

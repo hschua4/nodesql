@@ -18,6 +18,9 @@ const EmployeeEditView = ({ match, history }) => {
 
 	const dispatch = useDispatch();
 
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
+
 	const employeeDetails = useSelector((state) => state.employeeDetails);
 	const { loading, error, employee } = employeeDetails;
 
@@ -29,6 +32,10 @@ const EmployeeEditView = ({ match, history }) => {
 	} = employeeUpdate;
 
 	useEffect(() => {
+		if (!userInfo) {
+			history.push('/');
+		}
+
 		if (successUpdate) {
 			dispatch({ type: EMPLOYEE_UPDATE_RESET });
 			history.push('/employee/pages/1');
@@ -43,7 +50,7 @@ const EmployeeEditView = ({ match, history }) => {
 				setPhone(employee.Phone);
 			}
 		}
-	}, [dispatch, history, employeeId, employee, successUpdate]);
+	}, [dispatch, history, employeeId, employee, successUpdate, userInfo]);
 
 	// const uploadFileHandler = async (e) => {
 	// 	const file = e.target.files[0];

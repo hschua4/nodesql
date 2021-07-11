@@ -20,6 +20,9 @@ const CompanyEditScreen = ({ match, history }) => {
 	const companyDetails = useSelector((state) => state.companyDetails);
 	const { loading, error, company } = companyDetails;
 
+	const userLogin = useSelector((state) => state.userLogin);
+	const { userInfo } = userLogin;
+
 	const companyUpdate = useSelector((state) => state.companyUpdate);
 	const {
 		loading: loadingUpdate,
@@ -28,6 +31,10 @@ const CompanyEditScreen = ({ match, history }) => {
 	} = companyUpdate;
 
 	useEffect(() => {
+		if (!userInfo) {
+			history.push('/');
+		}
+
 		if (successUpdate) {
 			dispatch({ type: COMPANY_UPDATE_RESET });
 			history.push('/company/pages/1');
@@ -41,7 +48,7 @@ const CompanyEditScreen = ({ match, history }) => {
 				setWebsiteURL(company.WebsiteURL);
 			}
 		}
-	}, [dispatch, history, companyId, company, successUpdate]);
+	}, [dispatch, history, companyId, company, successUpdate, userInfo]);
 
 	// const uploadFileHandler = async (e) => {
 	// 	const file = e.target.files[0];
