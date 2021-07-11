@@ -59,6 +59,8 @@ npm run dev
 ```
 
 1. The app should be running on localhost:3000
+1. You should be seeing the screen below:
+   ![Login Page](https://github.com/hschua4/nodesql/blob/frontend/public/nodesql1.jpg?raw=true)
 1. Use the following credential to log in:
    Email Address: admin@admin.com
    Password: password
