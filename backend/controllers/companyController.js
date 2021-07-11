@@ -5,7 +5,7 @@ const { Companies } = require('../models');
 // @access  Private
 const getCompanies = async (req, res) => {
 	try {
-		const pageSize = 2;
+		const pageSize = 10;
 		const page = Number(req.query.pageNumber) || 1;
 
 		const companies = await Companies.findAll({
